@@ -37,20 +37,29 @@ namespace Threax.AspNetCore.BuiltInTools
                         {
                             if (args.Length > 1)
                             {
-                                runner.RunTool(args[1], new ToolArgs()
+                                foreach(var tool in args.Skip(1))
                                 {
-                                    Args = args,
-                                    Host = host,
-                                    Scope = scope,
-                                    Log = log
-                                });
+                                    log.LogInformation($"Running tool {tool}.");
+                                    var run = runner.RunTool(args[1], new ToolArgs()
+                                    {
+                                        Host = host,
+                                        Scope = scope,
+                                        Log = log
+                                    });
+                                    if (!run)
+                                    {
+                                        log.LogError($"Could not find tool {tool}.");
+                                    }
+                                }
                             }
                             else
                             {
+                                log.LogInformation("Supported tools:");
                                 foreach (var help in runner.HelpMessages)
                                 {
                                     log.LogInformation(help);
                                 }
+                                log.LogInformation("Multiple tools can be run at once by specifying them on the command line.");
                             }
                         }
                         else

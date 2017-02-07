@@ -10,8 +10,6 @@ namespace Threax.AspNetCore.BuiltInTools
 {
     public class ToolArgs
     {
-        public String[] Args { get; set; }
-
         public IWebHost Host { get; set; }
 
         public IServiceScope Scope { get; set; }
