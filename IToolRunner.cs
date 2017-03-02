@@ -17,10 +17,9 @@ namespace Threax.AspNetCore.BuiltInTools
         /// <summary>
         /// Run a tool, returns true if a tool was run, false if it was not and the website should be run.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="args"></param>
+        /// <param name="args">The tool args to run</param>
         /// <returns></returns>
-        bool RunTool(String name, ToolArgs args);
+        bool RunTool(ToolArgs args);
 
         /// <summary>
         /// The help messages for the tools.

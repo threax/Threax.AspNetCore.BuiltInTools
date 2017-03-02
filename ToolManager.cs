@@ -66,7 +66,7 @@ namespace Threax.AspNetCore.BuiltInTools
                                 foreach (var tool in args.Skip(1))
                                 {
                                     log.LogInformation($"Running tool {tool}.");
-                                    var run = runner.RunTool(tool, new ToolArgs()
+                                    var run = runner.RunTool(new ToolArgs(tool)
                                     {
                                         Host = host,
                                         Scope = scope,

@@ -23,10 +23,10 @@ namespace Threax.AspNetCore.BuiltInTools
             return this;
         }
 
-        public bool RunTool(String name, ToolArgs args)
+        public bool RunTool(ToolArgs args)
         {
             IToolCommand command;
-            if (commands.TryGetValue(name, out command))
+            if (commands.TryGetValue(args.Name, out command))
             {
                 command.Execute(args);
                 return true;
