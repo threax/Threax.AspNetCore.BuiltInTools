@@ -10,14 +10,14 @@ namespace Threax.AspNetCore.BuiltInTools
     /// </summary>
     public class ToolCommand : IToolCommand
     {
-        public Action<ToolArgs> action;
+        public Func<ToolArgs, Task> action;
 
-        public ToolCommand(Action<ToolArgs> action)
+        public ToolCommand(Func<ToolArgs, Task> action)
         {
             this.action = action;
         }
 
-        public ToolCommand(String help, Action<ToolArgs> action)
+        public ToolCommand(String help, Func<ToolArgs, Task> action)
         {
             this.action = action;
             this.Help = help;
@@ -27,7 +27,8 @@ namespace Threax.AspNetCore.BuiltInTools
 
         public void Execute(ToolArgs args)
         {
-            action(args);
+            var t = action(args);
+            t.Wait();
         }
     }
 }
