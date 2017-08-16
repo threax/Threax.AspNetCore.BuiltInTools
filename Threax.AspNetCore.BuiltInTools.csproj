@@ -2,16 +2,11 @@
 
   <PropertyGroup>
     <VersionPrefix>2.1.0</VersionPrefix>
-    <TargetFrameworks>netstandard1.6;net452</TargetFrameworks>
+    <TargetFrameworks>netstandard1.6</TargetFrameworks>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>Threax.AspNetCore.BuiltInTools</AssemblyName>
     <PackageId>Threax.AspNetCore.BuiltInTools</PackageId>
-    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
-    <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.6' ">$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <Version>3.0.1</Version>
     <AssemblyVersion>3.0.1.0</AssemblyVersion>
     <FileVersion>3.0.1.0</FileVersion>
