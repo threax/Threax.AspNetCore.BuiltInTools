@@ -1,15 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <VersionPrefix>2.1.0</VersionPrefix>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>Threax.AspNetCore.BuiltInTools</AssemblyName>
     <PackageId>Threax.AspNetCore.BuiltInTools</PackageId>
-    <Version>4.0.1</Version>
-    <AssemblyVersion>3.0.1.0</AssemblyVersion>
-    <FileVersion>3.0.1.0</FileVersion>
+    <Version>4.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
