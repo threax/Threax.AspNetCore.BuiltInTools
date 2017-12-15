@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threax.AspNetCore.BuiltInTools", "Threax.AspNetCore.BuiltInTools\Threax.AspNetCore.BuiltInTools.csproj", "{F409FC8D-3E84-427A-BAB6-E5C969C1D408}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F409FC8D-3E84-427A-BAB6-E5C969C1D408}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F409FC8D-3E84-427A-BAB6-E5C969C1D408}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F409FC8D-3E84-427A-BAB6-E5C969C1D408}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F409FC8D-3E84-427A-BAB6-E5C969C1D408}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C3FAA0AB-2D6B-4B20-BA14-B4A1A5466D10}
+	EndGlobalSection
+EndGlobal
