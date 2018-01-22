@@ -11,6 +11,7 @@ namespace Threax.AspNetCore.BuiltInTools
     public class ToolRunner : IToolRunner
     {
         private Dictionary<String, IToolCommand> commands = new Dictionary<string, IToolCommand>();
+        private List<Action<ToolArgs>> afterTools = new List<Action<ToolArgs>>();
 
         public ToolRunner()
         {
@@ -32,6 +33,20 @@ namespace Threax.AspNetCore.BuiltInTools
                 return true;
             }
             return false;
+        }
+
+        public IToolRunner AfterTools(Action<ToolArgs> cb)
+        {
+            afterTools.Add(cb);
+            return this;
+        }
+
+        public void RunAfterTools(ToolArgs args)
+        {
+            foreach(var evt in afterTools)
+            {
+                evt.Invoke(args);
+            }
         }
 
         public IEnumerable<String> HelpMessages

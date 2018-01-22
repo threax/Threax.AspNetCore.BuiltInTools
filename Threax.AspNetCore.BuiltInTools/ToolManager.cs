@@ -87,6 +87,13 @@ namespace Threax.AspNetCore.BuiltInTools
                                 }
                                 log.LogInformation("Multiple tools can be run at once by specifying them on the command line.");
                             }
+
+                            runner.RunAfterTools(new ToolArgs()
+                            {
+                                Host = host,
+                                Scope = scope,
+                                Log = log
+                            });
                         }
                         else
                         {

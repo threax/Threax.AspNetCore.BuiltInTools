@@ -25,5 +25,17 @@ namespace Threax.AspNetCore.BuiltInTools
         /// The help messages for the tools.
         /// </summary>
         IEnumerable<String> HelpMessages { get; }
+
+        /// <summary>
+        /// Run the passed method after all tools have run.
+        /// </summary>
+        /// <param name="cb"></param>
+        /// <returns></returns>
+        IToolRunner AfterTools(Action<ToolArgs> cb);
+
+        /// <summary>
+        /// Run all the after tools events.
+        /// </summary>
+        void RunAfterTools(ToolArgs args);
     }
 }
