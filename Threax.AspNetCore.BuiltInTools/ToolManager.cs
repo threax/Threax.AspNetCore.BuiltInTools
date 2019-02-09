@@ -14,6 +14,8 @@ namespace Threax.AspNetCore.BuiltInTools
     public class ToolManager
     {
         private String[] args;
+        private int toolsIndex;
+        public bool HasToolArg => toolsIndex < args.Length;
 
         /// <summary>
         /// Constructor, takes the command line args.
@@ -22,6 +24,7 @@ namespace Threax.AspNetCore.BuiltInTools
         public ToolManager(String[] args)
         {
             this.args = args;
+            for (toolsIndex = 0; toolsIndex < args.Length && args[toolsIndex] != "tools"; ++toolsIndex) ;
         }
 
         /// <summary>
@@ -30,11 +33,20 @@ namespace Threax.AspNetCore.BuiltInTools
         /// <returns></returns>
         public String GetEnvironment()
         {
-            if(args.Length > 0 && args[0] == "tools")
+            if (HasToolArg)
             {
                 return "tools";
             }
             return null;
+        }
+
+        /// <summary>
+        /// Get args without the tools, so they can be passed onward without interfering.
+        /// </summary>
+        /// <returns></returns>
+        public String[] GetCleanArgs()
+        {
+            return args.Take(toolsIndex).ToArray();
         }
 
         /// <summary>
@@ -46,59 +58,56 @@ namespace Threax.AspNetCore.BuiltInTools
         {
             bool normalRun = true;
 
-            if (args.Length > 0)
+            if (HasToolArg)
             {
-                if (args[0] == "tools")
+                normalRun = false;
+
+                using (var scope = host.Services.GetService<IServiceScopeFactory>().CreateScope())
                 {
-                    normalRun = false;
+                    var logger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>();
+                    var log = logger.CreateLogger<ToolRunner>();
 
-                    using (var scope = host.Services.GetService<IServiceScopeFactory>().CreateScope())
+                    var runner = scope.ServiceProvider.GetService<IToolRunner>();
+
+                    if (runner != null)
                     {
-                        var logger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>();
-                        var log = logger.CreateLogger<ToolRunner>();
-
-                        var runner = scope.ServiceProvider.GetService<IToolRunner>();
-
-                        if (runner != null)
+                        if (args.Length > toolsIndex + 1)
                         {
-                            if (args.Length > 1)
+                            foreach (var tool in args.Skip(toolsIndex + 1))
                             {
-                                foreach (var tool in args.Skip(1))
+                                log.LogInformation($"Running tool {tool}.");
+                                var run = runner.RunTool(new ToolArgs(tool)
                                 {
-                                    log.LogInformation($"Running tool {tool}.");
-                                    var run = runner.RunTool(new ToolArgs(tool)
-                                    {
-                                        Host = host,
-                                        Scope = scope,
-                                        Log = log
-                                    });
-                                    if (!run)
-                                    {
-                                        log.LogError($"Could not find tool {tool}.");
-                                    }
+                                    Host = host,
+                                    Scope = scope,
+                                    Log = log
+                                });
+                                if (!run)
+                                {
+                                    log.LogError($"Could not find tool {tool}.");
                                 }
                             }
-                            else
-                            {
-                                log.LogInformation("Supported tools:");
-                                foreach (var help in runner.HelpMessages)
-                                {
-                                    log.LogInformation(help);
-                                }
-                                log.LogInformation("Multiple tools can be run at once by specifying them on the command line.");
-                            }
-
-                            runner.RunAfterTools(new ToolArgs()
-                            {
-                                Host = host,
-                                Scope = scope,
-                                Log = log
-                            });
                         }
                         else
                         {
-                            log.LogError("Cannot find IToolRunner, did you forget to define one in services?");
+                            log.LogInformation("Supported tools:");
+                            foreach (var help in runner.HelpMessages)
+                            {
+                                log.LogInformation(help);
+                            }
+                            log.LogInformation("Multiple tools can be run at once by specifying them on the command line.");
                         }
+
+                        runner.RunAfterTools(new ToolArgs()
+                        {
+                            Host = host,
+                            Scope = scope,
+                            Log = log
+                        });
+                    }
+                    else
+                    {
+                        log.LogError("Cannot find IToolRunner, did you forget to define one in services?");
                     }
                 }
             }

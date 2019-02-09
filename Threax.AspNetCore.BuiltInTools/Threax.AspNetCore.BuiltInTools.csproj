@@ -6,7 +6,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>Threax.AspNetCore.BuiltInTools</AssemblyName>
     <PackageId>Threax.AspNetCore.BuiltInTools</PackageId>
-    <Version>5.1.0</Version>
+    <Version>5.2.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSymbols>True</IncludeSymbols>
     <IncludeSource>True</IncludeSource>
@@ -15,6 +15,7 @@
     <RepositoryUrl>https://github.com/threax/Threax.AspNetCore.BuiltInTools</RepositoryUrl>
     <Description>A library to include additional command line tools in an asp.net core website.</Description>
     <Authors>Andrew Piper</Authors>
+    <PackageReleaseNotes>5.2.0 - Better api and more robust calculation of tool argument.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
