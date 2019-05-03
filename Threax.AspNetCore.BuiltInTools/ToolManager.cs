@@ -75,16 +75,19 @@ namespace Threax.AspNetCore.BuiltInTools
                         {
                             foreach (var tool in args.Skip(toolsIndex + 1))
                             {
-                                log.LogInformation($"Running tool {tool}.");
-                                var run = runner.RunTool(new ToolArgs(tool)
+                                using (var toolScope = host.Services.GetService<IServiceScopeFactory>().CreateScope())
                                 {
-                                    Host = host,
-                                    Scope = scope,
-                                    Log = log
-                                });
-                                if (!run)
-                                {
-                                    log.LogError($"Could not find tool {tool}.");
+                                    log.LogInformation($"Running tool {tool}.");
+                                    var run = runner.RunTool(new ToolArgs(tool)
+                                    {
+                                        Host = host,
+                                        Scope = toolScope,
+                                        Log = log
+                                    });
+                                    if (!run)
+                                    {
+                                        log.LogError($"Could not find tool {tool}.");
+                                    }
                                 }
                             }
                         }
