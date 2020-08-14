@@ -6,7 +6,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>Threax.AspNetCore.BuiltInTools</AssemblyName>
     <PackageId>Threax.AspNetCore.BuiltInTools</PackageId>
-    <Version>5.3.1-pre01</Version>
+    <Version>5.3.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSymbols>True</IncludeSymbols>
     <IncludeSource>True</IncludeSource>
