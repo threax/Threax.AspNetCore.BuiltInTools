@@ -1,24 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netcoreapp3.1</TargetFrameworks>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>Threax.AspNetCore.BuiltInTools</AssemblyName>
     <PackageId>Threax.AspNetCore.BuiltInTools</PackageId>
-    <Version>5.3.0</Version>
+    <Version>5.3.1-pre01</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeSymbols>True</IncludeSymbols>
     <IncludeSource>True</IncludeSource>
-    <PackageLicenseUrl>https://github.com/threax/Threax.AspNetCore.BuiltInTools/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/threax/Threax.AspNetCore.BuiltInTools</PackageProjectUrl>
     <RepositoryUrl>https://github.com/threax/Threax.AspNetCore.BuiltInTools</RepositoryUrl>
     <Description>A library to include additional command line tools in an asp.net core website.</Description>
     <Authors>Andrew Piper</Authors>
     <PackageReleaseNotes>5.3.0 - Create a new scope for each tool as they are run.</PackageReleaseNotes>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.0.1" />
   </ItemGroup>
 
